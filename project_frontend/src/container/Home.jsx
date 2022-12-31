@@ -1,8 +1,83 @@
-// import {  useState, useRef, useEffect } from "react";
-// import { HiMenu } from "react-icons/hi";
+import { useState, useRef, useEffect } from "react";
+import { HiMenu } from "react-icons/hi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { Link, Route, Routes } from "react-router-dom";
+
+import { SideBar, UserProfile } from "../components";
+import Pins from "./Pins";
+import { userQuery } from "../utils/data";
+import { client } from "../client";
+import logo from "../assets/logo.png";
 
 const Home = () => {
-  return <div>Home</div>;
+  const [ToggleSidebar, setToggleSidebar] = useState(false);
+  const [user, setUser] = useState(null);
+  const scrollRef = useRef(null);
+
+  // accessing user info form local storage
+  const userInfo =
+    localStorage.getItem("user") !== "undefined"
+      ? JSON.parse(localStorage.getItem("user"))
+      : localStorage.clear();
+
+  useEffect(() => {
+    // fetching user data
+    const query = userQuery(userInfo?.sub);
+
+    client.fetch(query).then((data) => {
+      setUser(data[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="flex flex-col h-screen duration-75 ease-out transition-height md:flex-row bg-gray-50">
+      <div className="flex-initial hidden h-screen md:flex">
+        <SideBar user={user && user} />
+      </div>
+
+      {/* Mobile sidebar */}
+      <div className="flex flex-row md:hidden">
+        <HiMenu
+          fontSize={40}
+          className="cursor-pointer"
+          onClick={() => setToggleSidebar(true)}
+        />
+
+        <Link to="/">
+          <img src={logo} alt="Logo" className="w-28" />
+        </Link>
+
+        <Link to={`user-profile/${user?._id}`}>
+          <img src={user?.image} alt="User Profile Pic" className="w-28" />
+        </Link>
+      </div>
+
+      {ToggleSidebar && (
+        <div className="fixed z-10 w-4/5 h-screen overflow-y-auto bg-white shadow-md animate-slideIn">
+          <div className="absolute flex items-center justify-end w-full p-2">
+            <AiFillCloseCircle
+              fontSize={30}
+              className="cursor-pointer"
+              onClick={() => setToggleSidebar(false)}
+            />
+          </div>
+
+          <SideBar user={user && user} closeToggle={setToggleSidebar} />
+        </div>
+      )}
+
+      <div className="flex-1 h-screen pb-2 overflow-y-scroll" ref={scrollRef}>
+        <Routes>
+          <Route path="/user-profile/:userId" element={<UserProfile />} />
+          <Route path="/*" element={<Pins user={user && user} />} />
+        </Routes>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
