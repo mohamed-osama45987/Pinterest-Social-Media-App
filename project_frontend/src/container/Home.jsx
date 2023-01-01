@@ -39,37 +39,42 @@ const Home = () => {
         <SideBar user={user && user} />
       </div>
 
-      {/* Mobile sidebar */}
+      {/* Mobile menu */}
       <div className="flex flex-row md:hidden">
-        <HiMenu
-          fontSize={40}
-          className="cursor-pointer"
-          onClick={() => setToggleSidebar(true)}
-        />
+        {/* mobile Navbar */}
+        <div className="flex flex-row items-center justify-between w-full p-2 shadow-md">
+          <HiMenu
+            fontSize={40}
+            className="cursor-pointer"
+            onClick={() => setToggleSidebar(true)}
+          />
 
-        <Link to="/">
-          <img src={logo} alt="Logo" className="w-28" />
-        </Link>
+          <Link to="/">
+            <img src={logo} alt="Logo" className="w-28" />
+          </Link>
 
-        <Link to={`user-profile/${user?._id}`}>
-          <img src={user?.image} alt="User Profile Pic" className="w-28" />
-        </Link>
+          <Link to={`user-profile/${user?._id}`}>
+            <img src={user?.image} alt="User Profile Pic" className="w-28" />
+          </Link>
+        </div>
+
+        {/* actual mobile sidebar menu */}
+        {ToggleSidebar && (
+          <div className="fixed z-10 w-4/5 h-screen overflow-y-auto bg-white shadow-md animate-slideIn">
+            <div className="absolute flex items-center justify-end w-full p-2">
+              <AiFillCloseCircle
+                fontSize={30}
+                className="cursor-pointer"
+                onClick={() => setToggleSidebar(false)}
+              />
+            </div>
+
+            <SideBar user={user && user} closeToggle={setToggleSidebar} />
+          </div>
+        )}
       </div>
 
-      {ToggleSidebar && (
-        <div className="fixed z-10 w-4/5 h-screen overflow-y-auto bg-white shadow-md animate-slideIn">
-          <div className="absolute flex items-center justify-end w-full p-2">
-            <AiFillCloseCircle
-              fontSize={30}
-              className="cursor-pointer"
-              onClick={() => setToggleSidebar(false)}
-            />
-          </div>
-
-          <SideBar user={user && user} closeToggle={setToggleSidebar} />
-        </div>
-      )}
-
+      {/* images grid for each user  */}
       <div className="flex-1 h-screen pb-2 overflow-y-scroll" ref={scrollRef}>
         <Routes>
           <Route path="/user-profile/:userId" element={<UserProfile />} />
