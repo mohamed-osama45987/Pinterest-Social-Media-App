@@ -27,7 +27,7 @@ const Login = () => {
 
     // create a user in our sanity backend
     client.createIfNotExists(doc).then(() => {
-      // redirect the user to our home page of google sign in successfully
+      // auto redirect the user to our home page of google sign in successfully
       navigate("/", {
         replace: true,
       });
