@@ -1,20 +1,23 @@
 # ShareMe Social Media Application
+![ShareMe](https://i.ibb.co/8cLfj3X/image.png)  
 
-![ShareMe](https://i.ibb.co/8cLfj3X/image.png)
 
-Live link : https://sharemeproject.netlify.app
+Live link : https://sharemeproject.netlify.app    
+
 
 ## Introduction
+ This project is a image sharing Social Media Application that allow users to post images and save images to there account
 
-This project is a image sharing Social Media Application that allow users to post images and save images to there account
 
 ## Project features
-
-- Google Authintecation
+- Google Authentication
+- User Profile
 - CRUD operations for each pin
 - Image upload
 - Save images to user account
-- Image download
+- Image download 
+
+
 
 ## Environment Variables
 
@@ -25,6 +28,9 @@ To run this project, you will need to add the following environment variables to
 `REACT_APP_SANITY_PROJECT_ID`
 
 `REACT_APP_SANITY_PROJECT_TOKEN`
+
+
+
 
 ## Run Locally
 
@@ -56,8 +62,11 @@ Start the dev server
   npm run start
 ```
 
+
+
 ### Tech Stack
 
 - React (Front-end)
-- Sanity (Back-end)
+- Sanity (Back-end) 
 - Netlify (Deployment)
+
