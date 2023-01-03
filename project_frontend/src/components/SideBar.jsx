@@ -1,28 +1,10 @@
-import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 // import { IoIosArrowForward } from "react-icons/io";
 
 import logo from "../assets/logo.png";
 
-const categories = [
-  {
-    name: "Animals",
-  },
-
-  {
-    name: "Wallpapers",
-  },
-  {
-    name: "Photography ",
-  },
-  {
-    name: "Gaming",
-  },
-  {
-    name: "Coding ",
-  },
-];
+import { categories } from "../utils/data";
 
 const isNotActiveStyle =
   "flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
@@ -71,6 +53,11 @@ function SideBar({ user, closeToggle }) {
               onClick={handelCloseSidebar}
               key={category.name}
             >
+              <img
+                src={category.image}
+                className="w-8 h-8 rounded-full shadow-sm"
+                alt="category"
+              />
               {category.name}
             </NavLink>
           ))}

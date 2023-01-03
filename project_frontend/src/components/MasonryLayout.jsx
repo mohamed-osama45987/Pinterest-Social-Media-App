@@ -1,4 +1,4 @@
-import React from "react";
+
 import Masonry from "react-masonry-css";
 import Pin from "./Pin"; // one indvidual pin (card) layout
 
@@ -12,7 +12,6 @@ const breakpointObj = {
 };
 
 function MasonryLayout({ pins }) {
-  console.log({ pins });
   return (
     <Masonry className="flex" breakpointCols={breakpointObj}>
       {pins?.map((pin) => (

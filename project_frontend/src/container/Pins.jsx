@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { NavBar, Feed, PinDetails, CreatePin, Search } from "../components";
@@ -21,10 +21,10 @@ function Pins({ user }) {
           <Route path="/" element={<Feed />}></Route>
           <Route path="/category/:categoryId" element={<Feed />}></Route>
           <Route
-            path="/pin/detail/:pinId"
+            path="/pin-detail/:pinId"
             element={<PinDetails user={user} />}
           ></Route>
-          <Route path="/creat-pin" element={<CreatePin user={user} />}></Route>
+          <Route path="/create-pin" element={<CreatePin user={user} />}></Route>
           <Route
             path="/search"
             element={

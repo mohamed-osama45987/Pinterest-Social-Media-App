@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; //in order to access the parameters inside the url
 
 import { client } from "../client";
@@ -37,6 +37,10 @@ function Feed() {
   // impelement loading spinner
   if (loading) {
     return <Spinner message="Adding new ideas to your feed!" />;
+  }
+
+  if (!pins?.length) {
+    return <h2>No pins available </h2>;
   }
 
   return <div>{pins && <MasonryLayout pins={pins} />}</div>;
