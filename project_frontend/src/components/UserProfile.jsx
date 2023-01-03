@@ -17,7 +17,7 @@ const randomImage =
 function UserProfile() {
   const [user, setUser] = useState(null);
   const [pins, setPins] = useState(null);
-  const [text, setText] = useState("created"); // it will be created or saved
+  const [text, setText] = useState("Created"); // it will be created or saved
   const [activeBtn, setActiveBtn] = useState();
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function UserProfile() {
 
   // get all saved or created posts
   useEffect(() => {
-    if (text === "created") {
+    if (text === "Created") {
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
       client.fetch(createdPinsQuery).then((data) => {
@@ -103,10 +103,10 @@ function UserProfile() {
               type="button"
               onClick={(e) => {
                 setText(e.target.textContent);
-                setActiveBtn("created");
+                setActiveBtn("Created");
               }}
               className={`${
-                activeBtn === "created" ? activeBtnStyles : notActiveBtnStyles
+                activeBtn === "Created" ? activeBtnStyles : notActiveBtnStyles
               }`}
             >
               Created
@@ -116,10 +116,10 @@ function UserProfile() {
               type="button"
               onClick={(e) => {
                 setText(e.target.textContent);
-                setActiveBtn("saved");
+                setActiveBtn("Saved");
               }}
               className={`${
-                activeBtn === "saved" ? activeBtnStyles : notActiveBtnStyles
+                activeBtn === "Saved" ? activeBtnStyles : notActiveBtnStyles
               }`}
             >
               Saved
